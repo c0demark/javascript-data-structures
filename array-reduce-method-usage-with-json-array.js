@@ -26,11 +26,13 @@
     accumulation = tableData.reduce(function(uniqueKeyAccumulator, currentRow) {
         var uniqueKey = currentRow["c1"];
         var value = currentRow["c2"];
-        if (!(uniqueKey in uniqueKeyAccumulator)) {
-            uniqueKeyAccumulator[uniqueKey] = [];
+        if (uniqueKey !== undefined && value !== undefined) {
+            if (!(uniqueKey in uniqueKeyAccumulator)) {
+                uniqueKeyAccumulator[uniqueKey] = [];
+            }
+            uniqueKeyAccumulator[uniqueKey].push(value);
+            uniqueKeyAccumulator[uniqueKey].sort();
         }
-        uniqueKeyAccumulator[uniqueKey].push(value);
-        uniqueKeyAccumulator[uniqueKey].sort();
         return uniqueKeyAccumulator;
     }, {});
 
